@@ -100,7 +100,7 @@ public class SareetaApplicationTests {
 		User user = createMockUserData();
 		user.setPassword("");
 		MvcResult mvcResult = mockPostRequest(user, createUserUrl);
-		assertEquals(401, mvcResult.getResponse().getStatus());
+		assertEquals(400, mvcResult.getResponse().getStatus());
 	}
 
 	@Test

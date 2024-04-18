@@ -7,7 +7,6 @@ import com.example.demo.model.persistence.repositories.UserRepository;
 import com.example.demo.model.requests.CreateUserRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -56,7 +55,7 @@ public class UserController {
 			boolean isUserInfoError = Objects.isNull(createUserRequest.getPassword()) || Objects.isNull(createUserRequest.getUsername()) || createUserRequest.getPassword().isEmpty() || createUserRequest.getUsername().isEmpty();
 			if (isUserInfoError) {
 				log.error("Username Or Password is missing: user =  {}", createUserRequest);
-				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(user);
+				return ResponseEntity.badRequest().body(user);
 			} else if (createUserRequest.getPassword().length() < 7) {
 				log.error("Password must include more than 7 characters: password = {}", createUserRequest.getPassword());
 				return ResponseEntity.badRequest().body(user);
